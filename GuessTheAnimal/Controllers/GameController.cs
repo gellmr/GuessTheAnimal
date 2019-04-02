@@ -204,6 +204,106 @@ namespace GuessTheAnimal.Controllers
         Swim = true,
         Color = "grey"
       });
+      
+      animals.Add(new Animal
+      {
+        Name = "Tiger",
+        Fly = false,
+        Fast = true,
+        Legs = 4,
+        Stripes = true,
+        Swim = true,
+        Color = "yellow, black"
+      });
+      
+      animals.Add(new Animal
+      {
+        Name = "Eagle",
+        Fly = true,
+        Fast = true,
+        Legs = 2,
+        Stripes = false,
+        Swim = false,
+        Color = "brown"
+      });
+
+      animals.Add(new Animal
+      {
+        Name = "Swan",
+        Fly = true,
+        Fast = false,
+        Legs = 2,
+        Stripes = false,
+        Swim = true,
+        Color = "white"
+      });
+
+      animals.Add(new Animal
+      {
+        Name = "Turtle",
+        Fly = false,
+        Fast = false,
+        Legs = 4,
+        Stripes = false,
+        Swim = true,
+        Color = "green"
+      });
+      
+      animals.Add(new Animal
+      {
+        Name = "Man",
+        Fly = false,
+        Fast = false,
+        Legs = 2,
+        Stripes = false,
+        Swim = true,
+        Color = "brown"
+      });
+
+      animals.Add(new Animal
+      {
+        Name = "Frog",
+        Fly = false,
+        Fast = false,
+        Legs = 4,
+        Stripes = false,
+        Swim = false,
+        Color = "green"
+      });
+
+      animals.Add(new Animal
+      {
+        Name = "Crocodile",
+        Fly = false,
+        Fast = false,
+        Legs = 4,
+        Stripes = false,
+        Swim = true,
+        Color = "green"
+      });
+
+      animals.Add(new Animal
+      {
+        Name = "Elephant",
+        Fly = false,
+        Fast = false,
+        Legs = 4,
+        Stripes = false,
+        Swim = true,
+        Color = "grey"
+      });
+
+      animals.Add(new Animal
+      {
+        Name = "Skunk",
+        Fly = false,
+        Fast = false,
+        Legs = 4,
+        Stripes = true,
+        Swim = false,
+        Color = "black, white"
+      });
+
       return animals;
     }
   }
