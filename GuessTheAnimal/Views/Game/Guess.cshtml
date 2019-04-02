@@ -1,0 +1,11 @@
+﻿@model GuessTheAnimal.Models.QuestionViewModel
+
+<div class="jumbotron" style="margin-top:20px;">
+  <h1>Ok, is it _ type of animal?</h1>
+
+
+  <a href="@Url.Action("Correct", "Game")" class="btn btn-primary btn-lg"> Yes</a>
+  
+  <a href="@Url.Action("Wrong", "Game")" class="btn btn-primary btn-lg"> No</a>
+
+</div>
