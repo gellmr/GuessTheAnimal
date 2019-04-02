@@ -1,6 +1,17 @@
-﻿@model GuessTheAnimal.Models.QuestionViewModel
+﻿@model GuessTheAnimal.Models.UpdateAnimals
 
 <div class="jumbotron" style="margin-top:20px;">
   <h1>I give up. What kind of animal is it?</h1>
+
+  <form method="post" action="@Url.Action("UpdateAnimals", "Game")">
+    <fieldset>
+
+      @Html.TextBoxFor(model => model.NewAnimal, new { @class = "form-control" })
+      <hr />
+
+      <input type="submit" value="Ok" class="btn btn-primary btn-lg" />
+
+    </fieldset>
+  </form>
 
 </div>

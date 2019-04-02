@@ -9,7 +9,7 @@ namespace GuessTheAnimal.Controllers
 {
   public class GameController : Controller
   {
-    public List<Animal> Animals;
+    //public List<Animal> Animals;
 
     public Dictionary<string, string> GetSessionAnswers()
     {
@@ -24,7 +24,7 @@ namespace GuessTheAnimal.Controllers
     {
       Session["Answers"] = answers;
     }
-
+    
     public ActionResult Question1()
     {
       Dictionary<string, string> answers = GetSessionAnswers();
@@ -105,13 +105,13 @@ namespace GuessTheAnimal.Controllers
     public ActionResult End(string QuestionText, string Answer)
     {
       Dictionary<string, string> answers = GetSessionAnswers();
-      if (answers.ContainsKey(QuestionText)){ answers.Remove(QuestionText); } // overwrite previous answer is user navigates backward thru the quiz.
+      if (answers.ContainsKey(QuestionText)) { answers.Remove(QuestionText); } // overwrite previous answer is user navigates backward thru the quiz.
       answers.Add(QuestionText, Answer);
       SaveSessionAnswers(answers);
 
-      InitAnimals();
-      IEnumerable<Animal> animalSet = Animals.Where(a =>
-        a.Legs == int.Parse( answers["How many legs does the animal have?"])
+      List<Animal> animals = GetSessionAnimals();
+      IEnumerable<Animal> animalSet = animals.Where(a =>
+        a.Legs == int.Parse(answers["How many legs does the animal have?"])
         &&
         a.Stripes == YesNo(answers["Does it have stripes?"])
         &&
@@ -124,7 +124,13 @@ namespace GuessTheAnimal.Controllers
 
       List<Animal> result = animalSet.ToList();
 
-      QuestionViewModel model = new QuestionViewModel();
+      if (result.Count == 0)
+      {
+        return View("Wrong");
+      }
+      
+      GuessViewModel model = new GuessViewModel();
+      model.GuessAnimal = result.First().Name;
       return View("Guess", model);
     }
 
@@ -135,15 +141,50 @@ namespace GuessTheAnimal.Controllers
 
     public ActionResult Wrong()
     {
+      UpdateAnimals model = new UpdateAnimals();
+      model.NewAnimal = "";
       return View();
     }
 
-    private void InitAnimals()
+    // Remember the animal so we can guess it in the future.
+    public ActionResult UpdateAnimals(string NewAnimal)
+    {
+      Dictionary<string, string> answers = GetSessionAnswers();
+      List<Animal> animals = GetSessionAnimals();
+      Animal animal = new Animal
+      {
+        Name = NewAnimal,
+        Legs = int.Parse(answers["How many legs does the animal have?"]),
+        Stripes = YesNo(answers["Does it have stripes?"]),
+        Swim = YesNo(answers["Does it swim?"]),
+        Color = answers["What color is the animal?"],
+        Fly = YesNo(answers["Can it fly?"])
+      };
+      if (answers.ContainsKey(NewAnimal)) { answers.Remove(NewAnimal); } // avoid duplicates.
+      animals.Add(animal);
+      SaveSessionAnimals(animals);
+      return View("Correct");
+    }
+
+
+    // Todo: use localdb for persistence.
+
+    public List<Animal> GetSessionAnimals()
+    {
+      if (Session["Animals"] == null) { Session["Animals"] = InitAnimals(); }
+      return (List<Animal>)Session["Animals"];
+    }
+    public void SaveSessionAnimals(List<Animal> animals)
+    {
+      Session["Animals"] = animals;
+    }
+
+    private List<Animal> InitAnimals()
     {
       // TODO: use localdb and seed data
 
-      Animals = new List<Animal>();
-      Animals.Add(new Animal {
+      List<Animal> animals = new List<Animal>();
+      animals.Add(new Animal {
         Name = "Hippapotamus",
         Fly = false,
         Fast = false,
@@ -153,7 +194,7 @@ namespace GuessTheAnimal.Controllers
         Color = "grey"
       });
 
-      Animals.Add(new Animal
+      animals.Add(new Animal
       {
         Name = "Fish",
         Fly = false,
@@ -163,6 +204,7 @@ namespace GuessTheAnimal.Controllers
         Swim = true,
         Color = "grey"
       });
+      return animals;
     }
   }
 }

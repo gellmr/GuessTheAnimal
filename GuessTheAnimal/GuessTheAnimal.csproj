@@ -159,7 +159,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Animal.cs" />
+    <Compile Include="Models\GuessViewModel.cs" />
     <Compile Include="Models\QuestionViewModel.cs" />
+    <Compile Include="Models\UpdateAnimals.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
