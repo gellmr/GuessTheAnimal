@@ -44,9 +44,11 @@ namespace GuessTheAnimal.Controllers
       if (answers.ContainsKey(QuestionText)) { answers.Remove(QuestionText); } // overwrite previous answer is user navigates backward thru the quiz.
       answers.Add(QuestionText, Answer);
       SaveSessionAnswers(answers);
+
       QuestionViewModel model = new QuestionViewModel();
       model.QuestionText = "Does it have stripes?";
       model.NextQuestion = "Question3";
+      model.previousAnswers = answers;
       return View("TextQuestion", model);
     }
 
@@ -60,6 +62,7 @@ namespace GuessTheAnimal.Controllers
       QuestionViewModel model = new QuestionViewModel();
       model.QuestionText = "Does it swim?";
       model.NextQuestion = "Question4";
+      model.previousAnswers = answers;
       return View("TextQuestion", model);
     }
 
@@ -73,6 +76,7 @@ namespace GuessTheAnimal.Controllers
       QuestionViewModel model = new QuestionViewModel();
       model.QuestionText = "What color is the animal?";
       model.NextQuestion = "Question5";
+      model.previousAnswers = answers;
       return View("TextQuestion", model);
     }
 
@@ -86,6 +90,7 @@ namespace GuessTheAnimal.Controllers
       QuestionViewModel model = new QuestionViewModel();
       model.QuestionText = "Can it fly?";
       model.NextQuestion = "End";
+      model.previousAnswers = answers;
       return View("TextQuestion", model);
     }
 
@@ -130,6 +135,7 @@ namespace GuessTheAnimal.Controllers
       }
       
       GuessViewModel model = new GuessViewModel();
+      model.previousAnswers = answers;
       model.GuessAnimal = result.First().Name;
       return View("Guess", model);
     }

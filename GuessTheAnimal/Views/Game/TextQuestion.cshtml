@@ -7,6 +7,16 @@
     <h2>Ok now that you have thought of an animal...</h2>
   }
 
+
+  @if (Model.previousAnswers != null && Model.previousAnswers.Count > 0)
+  {
+    <h3><i>The facts so far...</i></h3>
+    foreach (KeyValuePair<string, string> answer in Model.previousAnswers)
+    {
+      <h4><i>@answer.Key &nbsp; @answer.Value</i></h4>
+    }
+  }
+
   <h1>@Model.QuestionText</h1>
 
   <form method="post" action="@Url.Action(Model.NextQuestion, "Game")">
