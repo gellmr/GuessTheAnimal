@@ -205,6 +205,8 @@
     <Content Include="Views\Game\Guess.cshtml" />
     <Content Include="Views\Game\Wrong.cshtml" />
     <Content Include="Views\Game\Correct.cshtml" />
+    <Content Include="Views\Game\NumericQuestion.cshtml" />
+    <Content Include="Views\Game\_QuestionTop.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

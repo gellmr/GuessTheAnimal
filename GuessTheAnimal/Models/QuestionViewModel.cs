@@ -12,8 +12,17 @@ namespace GuessTheAnimal.Models
     public bool FirstQuestion = false;
     public string QuestionText = "";
     public string NextQuestion = "";
+  }
 
+  public class TextQuestionViewModel : QuestionViewModel
+  {
     [Required]
     public string Answer = "";
+  }
+
+  public class NumericQuestionViewModel : QuestionViewModel
+  {
+    [Required]
+    public int? Answer = null;
   }
 }

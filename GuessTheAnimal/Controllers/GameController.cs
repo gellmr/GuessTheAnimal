@@ -30,11 +30,11 @@ namespace GuessTheAnimal.Controllers
       Dictionary<string, string> answers = GetSessionAnswers();
       answers.Clear();
       SaveSessionAnswers(answers);
-      QuestionViewModel model = new QuestionViewModel();
+      NumericQuestionViewModel model = new NumericQuestionViewModel();
       model.FirstQuestion = true;
       model.QuestionText = "How many legs does the animal have?";
       model.NextQuestion = "Question2";
-      return View("TextQuestion", model);
+      return View("NumericQuestion", model);
     }
     
     [HttpPost]
@@ -45,7 +45,7 @@ namespace GuessTheAnimal.Controllers
       answers.Add(QuestionText, Answer);
       SaveSessionAnswers(answers);
 
-      QuestionViewModel model = new QuestionViewModel();
+      TextQuestionViewModel model = new TextQuestionViewModel();
       model.QuestionText = "Does it have stripes?";
       model.NextQuestion = "Question3";
       model.previousAnswers = answers;
@@ -59,7 +59,7 @@ namespace GuessTheAnimal.Controllers
       if (answers.ContainsKey(QuestionText)) { answers.Remove(QuestionText); } // overwrite previous answer is user navigates backward thru the quiz.
       answers.Add(QuestionText, Answer);
       SaveSessionAnswers(answers);
-      QuestionViewModel model = new QuestionViewModel();
+      TextQuestionViewModel model = new TextQuestionViewModel();
       model.QuestionText = "Does it swim?";
       model.NextQuestion = "Question4";
       model.previousAnswers = answers;
@@ -73,7 +73,7 @@ namespace GuessTheAnimal.Controllers
       if (answers.ContainsKey(QuestionText)) { answers.Remove(QuestionText); } // overwrite previous answer is user navigates backward thru the quiz.
       answers.Add(QuestionText, Answer);
       SaveSessionAnswers(answers);
-      QuestionViewModel model = new QuestionViewModel();
+      TextQuestionViewModel model = new TextQuestionViewModel();
       model.QuestionText = "What color is the animal?";
       model.NextQuestion = "Question5";
       model.previousAnswers = answers;
@@ -87,7 +87,7 @@ namespace GuessTheAnimal.Controllers
       if (answers.ContainsKey(QuestionText)) { answers.Remove(QuestionText); } // overwrite previous answer is user navigates backward thru the quiz.
       answers.Add(QuestionText, Answer);
       SaveSessionAnswers(answers);
-      QuestionViewModel model = new QuestionViewModel();
+      TextQuestionViewModel model = new TextQuestionViewModel();
       model.QuestionText = "Can it fly?";
       model.NextQuestion = "End";
       model.previousAnswers = answers;
