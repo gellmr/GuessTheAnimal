@@ -4,7 +4,7 @@
 
   @if (Model.FirstQuestion)
   {
-    <h2>Ok now that you have thought of an animal...</h2>
+    <h2 class="text-center">Ok now that you have thought of an animal...</h2>
   }
 
 
@@ -17,19 +17,19 @@
     }
   }
 
-  <h1>@Model.QuestionText</h1>
+  <h1 class="text-center" style="font-size:50px;">@Model.QuestionText</h1>
 
   <form method="post" action="@Url.Action(Model.NextQuestion, "Game")">
     <fieldset>
-
       <input type="hidden" id="QuestionText" name="QuestionText" value="@Model.QuestionText">
 
-      @Html.TextBoxFor(model => model.Answer, new { @class = "form-control" })
-      <hr />
-
-      <input type="submit" value="Ok" class="btn btn-primary btn-lg" />
+      <div class="input-group" style="width:250px; margin-left:auto; margin-right:auto; margin-top:20px;">
+        @Html.TextBoxFor(model => model.Answer, new { @class = "form-control" })
+        <div class="input-group-btn">
+          <button class="btn btn-primary" type="submit" value="" style="max-width:100%;">Go</button>
+        </div>
+      </div>
 
     </fieldset>
   </form>
-
 </div>
