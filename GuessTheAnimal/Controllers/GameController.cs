@@ -45,11 +45,11 @@ namespace GuessTheAnimal.Controllers
       answers.Add(QuestionText, Answer);
       SaveSessionAnswers(answers);
 
-      TextQuestionViewModel model = new TextQuestionViewModel();
+      BoolQuestionViewModel model = new BoolQuestionViewModel();
       model.QuestionText = "Does it have stripes?";
       model.NextQuestion = "Question3";
       model.previousAnswers = answers;
-      return View("TextQuestion", model);
+      return View("YesNoQuestion", model);
     }
 
     [HttpPost]
@@ -59,11 +59,11 @@ namespace GuessTheAnimal.Controllers
       if (answers.ContainsKey(QuestionText)) { answers.Remove(QuestionText); } // overwrite previous answer is user navigates backward thru the quiz.
       answers.Add(QuestionText, Answer);
       SaveSessionAnswers(answers);
-      TextQuestionViewModel model = new TextQuestionViewModel();
+      BoolQuestionViewModel model = new BoolQuestionViewModel();
       model.QuestionText = "Does it swim?";
       model.NextQuestion = "Question4";
       model.previousAnswers = answers;
-      return View("TextQuestion", model);
+      return View("YesNoQuestion", model);
     }
 
     [HttpPost]
@@ -87,11 +87,11 @@ namespace GuessTheAnimal.Controllers
       if (answers.ContainsKey(QuestionText)) { answers.Remove(QuestionText); } // overwrite previous answer is user navigates backward thru the quiz.
       answers.Add(QuestionText, Answer);
       SaveSessionAnswers(answers);
-      TextQuestionViewModel model = new TextQuestionViewModel();
+      BoolQuestionViewModel model = new BoolQuestionViewModel();
       model.QuestionText = "Can it fly?";
       model.NextQuestion = "End";
       model.previousAnswers = answers;
-      return View("TextQuestion", model);
+      return View("YesNoQuestion", model);
     }
 
     // Convert "yes" into bool true and "no" into bool false.

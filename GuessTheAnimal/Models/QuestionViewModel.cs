@@ -25,4 +25,10 @@ namespace GuessTheAnimal.Models
     [Required]
     public int? Answer = null;
   }
+
+  public class BoolQuestionViewModel : QuestionViewModel
+  {
+    [Required]
+    public bool Answer = true;
+  }
 }

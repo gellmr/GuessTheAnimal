@@ -1,0 +1,33 @@
+﻿@model GuessTheAnimal.Models.BoolQuestionViewModel
+
+<div class="jumbotron" style="margin-top:20px;">
+
+  @{Html.RenderPartial("~/Views/Game/_QuestionTop.cshtml");}
+
+  <form method="post" id="quizForm" action="@Url.Action(Model.NextQuestion, "Game")">
+    <fieldset>
+      <input type="hidden" id="QuestionText" name="QuestionText" value="@Model.QuestionText">
+
+      <div style="width: 70px; margin-left: auto; margin-right: auto">
+        @Html.RadioButtonFor(model => model.Answer, "true", new Dictionary<string, object> { { "class", "form-control custom-radio" }, { "Required", "" }, { "id", "radio-true"}, { "checked", "checked" } })     @Html.Label("true", "Yes")
+
+      </div>
+
+      <div style="width: 70px; margin-left: auto; margin-right: auto">
+        @Html.RadioButtonFor(model => model.Answer, "false", new Dictionary<string, object> { { "class", "form-control custom-radio" }, { "Required", "" }, { "id", "radio-false" }}) @Html.Label("false", "No")
+      </div>
+
+      <div class="text-center" style="margin-top:15px;">
+        <button class="btn btn-primary" type="submit" value="" style="max-width:100%; width: 70px;">Go</button>
+      </div>
+
+    </fieldset>
+  </form>
+</div>
+<script>
+  $(document).ready(function () {
+    $("#Answer").val("");
+  });
+
+  $("#quizForm").validate();
+</script>
