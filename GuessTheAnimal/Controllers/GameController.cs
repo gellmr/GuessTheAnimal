@@ -115,16 +115,40 @@ namespace GuessTheAnimal.Controllers
       SaveSessionAnswers(answers);
 
       List<Animal> animals = GetSessionAnimals();
+
+      int? LegsCount = null;
+      if(answers.ContainsKey("How many legs does the animal have?")){
+        LegsCount = int.Parse(answers["How many legs does the animal have?"]);
+      }
+      bool? GotStripes = null;
+      if (answers.ContainsKey("Does it have stripes?")){
+        GotStripes = YesNo(answers["Does it have stripes?"]);
+      }
+      bool? DoesSwim = null;
+      if (answers.ContainsKey("Does it swim?")){
+        DoesSwim = YesNo(answers["Does it swim?"]);
+      }
+      string ItsColor = null;
+      if (answers.ContainsKey("What color is the animal?")){
+        ItsColor = answers["What color is the animal?"];
+      }
+      bool? CanFly = null;
+      if (answers.ContainsKey("Can it fly?")){
+        CanFly = YesNo(answers["Can it fly?"]);
+      }
+
+      // If any of the keys are missing from our known answers, we still search anyway using what we know about the animal.
+      // If search returns more than one animal we will guess the first one.
       IEnumerable<Animal> animalSet = animals.Where(a =>
-        a.Legs == int.Parse(answers["How many legs does the animal have?"])
+        (LegsCount == null ? true : (a.Legs == LegsCount))
         &&
-        a.Stripes == YesNo(answers["Does it have stripes?"])
+        (GotStripes == null ? true : a.Stripes == GotStripes)
         &&
-        a.Swim == YesNo(answers["Does it swim?"])
+        (DoesSwim == null ? true : (a.Swim == DoesSwim))
         &&
-        a.Color == answers["What color is the animal?"]
+        (ItsColor == null ? true : (a.Color == ItsColor))
         &&
-        a.Fly == YesNo(answers["Can it fly?"])
+        (CanFly == null ? true : (a.Fly == CanFly))
       );
 
       List<Animal> result = animalSet.ToList();
