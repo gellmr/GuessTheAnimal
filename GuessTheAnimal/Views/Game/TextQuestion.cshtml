@@ -19,17 +19,24 @@
 
   <h1 class="text-center" style="font-size:50px;">@Model.QuestionText</h1>
 
-  <form method="post" action="@Url.Action(Model.NextQuestion, "Game")">
+  <form method="post" id="quizForm" action="@Url.Action(Model.NextQuestion, "Game")">
     <fieldset>
       <input type="hidden" id="QuestionText" name="QuestionText" value="@Model.QuestionText">
 
       <div class="input-group" style="width:250px; margin-left:auto; margin-right:auto; margin-top:20px;">
-        @Html.TextBoxFor(model => model.Answer, new { @class = "form-control" })
-        <div class="input-group-btn">
-          <button class="btn btn-primary" type="submit" value="" style="max-width:100%;">Go</button>
+        @Html.TextBoxFor(model => model.Answer, new Dictionary<string, object> { { "class", "form-control" }, {"Required", ""} })
+        <div class="input-group-btn" style="width:60px;">
+          <button class="btn btn-primary" type="submit" value="" style="max-width:100%; width: 100%; top:0px; position:absolute;">Go</button>
         </div>
-      </div>
+    </div>
 
     </fieldset>
   </form>
 </div>
+<script>
+  $(document).ready(function () {
+    $("#Answer").val("");
+  });
+
+  $("#quizForm").validate();
+</script>

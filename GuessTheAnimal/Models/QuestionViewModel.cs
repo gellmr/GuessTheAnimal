@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace GuessTheAnimal.Models
 {
@@ -11,6 +12,8 @@ namespace GuessTheAnimal.Models
     public bool FirstQuestion = false;
     public string QuestionText = "";
     public string NextQuestion = "";
+
+    [Required]
     public string Answer = "";
   }
 }
